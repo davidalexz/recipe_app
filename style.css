@@ -5,6 +5,78 @@
 }
 
 body {
+    background: #e6dada;
+    background: -webkit-linear-gradient(to right, #57737a, #e6dada);
+    background: linear-gradient(to right, #57737a, #e6dada);
+
     font-family: 'Poppins', 'sans-serif';
     margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+.mobile-container {
+    width: 400px;
+    background-color: #fff;
+    box-shadow: 0 0 10px 2px #3333331a;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+header input {
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    border: none;
+    background-color: #efefef;
+}
+
+header button {
+    background-color: transparent;
+    color: #aaa;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.fav-container {
+    background: linear-gradient(to right, #92a9af, #e6dada);
+    padding: 1rem;
+    text-align: center;
+}
+
+.fav-meals {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    overflow: auto;
+}
+
+.fav-meals li {
+    width: 85px;
+}
+
+.fav-meals li img {
+    width: 70px;
+    border: 1px solid #ffffff88;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px #3333331a;
+}
+
+.fav-meals li span {
+    font-size: 0.8rem;
 }
