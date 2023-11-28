@@ -53,19 +53,22 @@ header button {
 
 .fav-container {
     background: linear-gradient(to right, #92a9af, #e6dada);
-    padding: 1rem;
+    padding: 0.25rem 1rem;
     text-align: center;
 }
 
 .fav-meals {
     display: flex;
-    list-style: none;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
     padding: 0;
-    overflow: auto;
+    flex-wrap: wrap;
 }
 
 .fav-meals li {
-    width: 85px;
+    width: 75px;
+    margin: 5px;
 }
 
 .fav-meals li img {
@@ -79,4 +82,53 @@ header button {
 
 .fav-meals li span {
     font-size: 0.8rem;
+}
+
+.meal {
+    margin: 1rem;
+    box-shadow: 0 0 10px 2px #3333331a;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.meal-header {
+    position: relative;
+}
+
+.meal-header .random {
+    position: absolute;
+    top: 1rem;
+    background-color: white;
+    padding: 0.25rem 0.5rem;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.meal-body img {
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+}
+
+.meal-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.meal-body h4 {
+    margin: 0;
+}
+
+.meal-body .fav-btn {
+    border: none;
+    font-size: 1.2rem;
+    color: rgb(187, 182, 182);
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.meal-body .fav-btn.active {
+    color: rebeccapurple;
 }
