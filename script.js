@@ -61,13 +61,13 @@ function addMeal(mealData, random = false) {
 	</div>
 	`;
     const btn = meal.querySelector('.meal-body .fav-btn');
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (event) => {
+        event.stopPropagation();
         if (btn.classList.contains('active')) {
             removeMealSL(mealData.idMeal);
             btn.classList.remove('active');
         } else {
             addMealSL(mealData.idMeal);
-
             btn.classList.add('active');
         }
 
@@ -126,10 +126,14 @@ function addMealToFav(mealData) {
 	`;
 
     const btn = favMeal.querySelector('.clear');
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (event) => {
+        event.stopPropagation();
         removeMealSL(mealData.idMeal);
-
         fetchFavMeals();
+    });
+
+    favMeal.addEventListener('click', () => {
+        showMealInfo(mealData);
     });
 
     favoriteContainer.appendChild(favMeal);
@@ -141,10 +145,26 @@ function showMealInfo(mealData) {
 
     //update the Meal info
     const mealEl = document.createElement('div');
+    console.log(mealData);
+
+    //get ingredients and measures list
+    const ingredients = [];
+    for (let i = 1; i <= 20; i++) {
+        if (mealData['strIngredient' + i]) {
+            ingredients.push(`${mealData['strIngredient' + i]} - ${mealData['strMeasure' + i]}`);
+        } else {
+            break;
+        }
+    }
+
     mealEl.innerHTML = `
 		<h1>${mealData.strMeal}</h1>
 		<img src="${mealData.strMealThumb}" alt="${mealData.strMeal}" />
 		<p>${mealData.strInstructions}</p>
+		<h3>Ingredients</h3>
+		<ul>
+			${ingredients.map((el) => `<li>${el}</li>`).join('')}
+		</ul>
 	`;
 
     mealInfoEl.appendChild(mealEl);
