@@ -1,7 +1,9 @@
-const meals = document.getElementById('meals');
+const mealsContainer = document.getElementById('meals');
 const favoriteContainer = document.getElementById('fav-meals');
 const searchTerm = document.getElementById('search-term');
 const searchBtn = document.getElementById('search');
+const mealPopup = document.getElementById('meal-popup');
+const popupBtn = document.getElementById('close-popup');
 
 getRandomMel();
 fetchFavMeals();
@@ -70,7 +72,7 @@ function addMeal(mealData, random = false) {
 
         fetchFavMeals();
     });
-    meals.appendChild(meal);
+    mealsContainer.appendChild(meal);
 }
 
 // Add mealId to localStorage based on what recipe we favorite
@@ -130,8 +132,17 @@ function addMealToFav(mealData) {
 }
 
 searchBtn.addEventListener('click', async () => {
+    //clean container
+    mealsContainer.innerHTML = '';
     const search = searchTerm.value;
 
     const meals = await getMealsBySearch(search);
-    meals.forEach((meal) => addMeal(meal));
+
+    if (meals) {
+        meals.forEach((meal) => addMeal(meal));
+    }
+});
+
+popupBtn.addEventListener('click', () => {
+    mealPopup.classList.add('hidden');
 });
