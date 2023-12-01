@@ -1,5 +1,7 @@
 const meals = document.getElementById('meals');
 const favoriteContainer = document.getElementById('fav-meals');
+const searchTerm = document.getElementById('search-term');
+const searchBtn = document.getElementById('search');
 
 getRandomMel();
 fetchFavMeals();
@@ -17,7 +19,6 @@ async function getRandomMel() {
 
 async function getMealById(id) {
     const res = await fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + id);
-
     const data = await res.json();
 
     const meal = data.meals[0];
@@ -26,8 +27,13 @@ async function getMealById(id) {
 
 // Get mail by searching for name(term)
 
-async function getMelsBySearch(term) {
-    const meals = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=` + term);
+async function getMealsBySearch(term) {
+    const res = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=' + term);
+
+    const data = await res.json();
+    const meals = data.meals;
+
+    return meals;
 }
 
 // Create div.meal element dynamicaly for the Random recipe
@@ -70,7 +76,6 @@ function addMeal(mealData, random = false) {
 // Add mealId to localStorage based on what recipe we favorite
 function addMealSL(mealId) {
     const mealIds = getMealSL();
-
     localStorage.setItem('mealIds', JSON.stringify([...mealIds, mealId]));
 }
 
@@ -123,3 +128,10 @@ function addMealToFav(mealData) {
 
     favoriteContainer.appendChild(favMeal);
 }
+
+searchBtn.addEventListener('click', async () => {
+    const search = searchTerm.value;
+
+    const meals = await getMealsBySearch(search);
+    meals.forEach((meal) => addMeal(meal));
+});
